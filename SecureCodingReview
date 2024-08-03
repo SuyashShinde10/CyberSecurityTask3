@@ -1,0 +1,34 @@
+#creating an flask app
+#app.py
+from flask import Flask, request, jsonify
+from werkzeug.exceptions import BadRequest
+
+app = Flask(__name__)
+
+@app.route('/')
+def home():
+    return "Welcome to the Flask app!"
+
+@app.route('/data', methods=['POST'])
+def data():
+    data = request.json
+    if not isinstance(data, dict):
+        raise BadRequest("Invalid input")
+    return jsonify(data)
+
+if __name__ == '__main__':
+    app.run(debug=True)
+
+#Commands in terminal:
+#python app.py
+#python -m venv venv
+#Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope Process
+#To activate your virtual environment in Windows using PowerShell:
+#.\venv\Scripts\Activate
+#venv\Scripts\activate.bat
+#pip install bandit
+#pip install flake8
+#bandit -r .
+#flake8 .
+#pip install pip-audit
+#pip-audit
